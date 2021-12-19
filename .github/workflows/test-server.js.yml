@@ -15,11 +15,6 @@ jobs:
       working-directory: ./server
     - run: npm run build
       working-directory: ./server
-    - uses: actions/setup-node@v2
-      with:
-        working-directory: ./server
-        node-version: 16 
-        cache: 'npm'
     - run: npm run lint
       working-directory: ./server
     - run: npm run test
