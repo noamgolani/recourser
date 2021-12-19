@@ -1,0 +1,23 @@
+{
+  "name": "recourser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+	  "start:server":"cd ./server && npm run start",
+	  "start:client":"cd ./client && npm run start",
+	  "build:server": "cd ./server && npm run build",
+	  "build:client":"cd ./client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noamgolani/recourser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noamgolani/recourser/issues"
+  },
+  "homepage": "https://github.com/noamgolani/recourser#readme"
+}
