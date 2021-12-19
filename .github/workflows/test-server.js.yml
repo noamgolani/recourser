@@ -9,19 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
     steps:
     - uses: actions/checkout@v2
-        working-directory: ./server
-    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        working-directory: ./server
-        node-version: ${{ matrix.node-version }}
+        node-version: 16 
         cache: 'npm'
+        working-directory: ./server
     - run: npm ci
         working-directory: ./server
     - run: npm run build
