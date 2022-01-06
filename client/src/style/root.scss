@@ -19,3 +19,24 @@ body, html {
 	flex-direction: column;
 	padding: 1rem;
 }
+
+.flex-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.resource-item {
+	width: 400px;
+	padding: 10px;
+
+	:hover {
+		cursor: pointer;
+	}
+}
+
+.tag {
+	background-color: grey;
+	border-radius: 15px;
+	padding: 2px 7px;
+}
