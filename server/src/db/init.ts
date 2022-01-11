@@ -7,6 +7,7 @@ import {
 	RecourseTag,
 	RecourseTagSuggestion,
 	RecourseType,
+	RecourseTypeSuggestion,
 } from "./models/Recourse";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -24,6 +25,7 @@ const dbInit = () => {
 	RecourseTagSuggestion.sync({ alter: isDev });
 
 	RecourseType.sync({ alter: isDev });
+	RecourseTypeSuggestion.sync({ alter: isDev });
 };
 
 export default dbInit;
