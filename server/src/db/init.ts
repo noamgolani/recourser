@@ -4,6 +4,8 @@ import {
 	RecourseView,
 	RecourseNameSuggestion,
 	RecourseLengthSuggestion,
+	RecourseTag,
+	RecourseType,
 } from "./models/Recourse";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -16,6 +18,10 @@ const dbInit = () => {
 	RecourseView.sync({ alter: isDev });
 	RecourseNameSuggestion.sync({ alter: isDev });
 	RecourseLengthSuggestion.sync({ alter: isDev });
+
+	RecourseTag.sync({ alter: isDev });
+	
+	RecourseType.sync({ alter: isDev });
 };
 
 export default dbInit;
