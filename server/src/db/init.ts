@@ -5,6 +5,7 @@ import {
 	RecourseNameSuggestion,
 	RecourseLengthSuggestion,
 	RecourseTag,
+	RecourseTagSuggestion,
 	RecourseType,
 } from "./models/Recourse";
 
@@ -20,7 +21,8 @@ const dbInit = () => {
 	RecourseLengthSuggestion.sync({ alter: isDev });
 
 	RecourseTag.sync({ alter: isDev });
-	
+	RecourseTagSuggestion.sync({ alter: isDev });
+
 	RecourseType.sync({ alter: isDev });
 };
 
