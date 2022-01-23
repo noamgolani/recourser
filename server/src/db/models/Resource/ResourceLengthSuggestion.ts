@@ -54,7 +54,7 @@ ResourceLengthSuggestion.init(
       },
     },
     length: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
