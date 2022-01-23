@@ -1,31 +1,31 @@
 import User from "./models/User";
 import {
-	Recourse,
-	RecourseView,
-	RecourseNameSuggestion,
-	RecourseLengthSuggestion,
-	RecourseTag,
-	RecourseTagSuggestion,
-	RecourseType,
-	RecourseTypeSuggestion,
-} from "./models/Recourse";
+  Resource,
+  ResourceView,
+  ResourceNameSuggestion,
+  ResourceLengthSuggestion,
+  ResourceTag,
+  ResourceTagSuggestion,
+  ResourceType,
+  ResourceTypeSuggestion,
+} from "./models/Resource";
 
 const isDev = process.env.NODE_ENV === "development";
 
 const dbInit = () => {
-	User.sync({ alter: isDev });
+  User.sync({ alter: isDev });
 
-	// Recourse sync
-	Recourse.sync({ alter: isDev });
-	RecourseView.sync({ alter: isDev });
-	RecourseNameSuggestion.sync({ alter: isDev });
-	RecourseLengthSuggestion.sync({ alter: isDev });
+  // Resource sync
+  Resource.sync({ alter: isDev });
+  ResourceView.sync({ alter: isDev });
+  ResourceNameSuggestion.sync({ alter: isDev });
+  ResourceLengthSuggestion.sync({ alter: isDev });
 
-	RecourseTag.sync({ alter: isDev });
-	RecourseTagSuggestion.sync({ alter: isDev });
+  ResourceTag.sync({ alter: isDev });
+  ResourceTagSuggestion.sync({ alter: isDev });
 
-	RecourseType.sync({ alter: isDev });
-	RecourseTypeSuggestion.sync({ alter: isDev });
+  ResourceType.sync({ alter: isDev });
+  ResourceTypeSuggestion.sync({ alter: isDev });
 };
 
 export default dbInit;

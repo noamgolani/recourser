@@ -1,9 +1,9 @@
 import express from "express";
 
-import { createNewRecourse } from "../controllers/resources";
+import { createNewResource } from "../controllers/resources";
 
 const router = express.Router();
 
-router.post("/", createNewRecourse);
+router.post("/", createNewResource);
 
 export default router;
