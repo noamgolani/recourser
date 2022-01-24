@@ -20,23 +20,15 @@ import {
   ResourceTypeSuggestionOutput,
 } from "../models/Resource";
 
-export interface CreateResourcePayload {
-  url: string;
-  creator_id: number;
-  name: string;
-  length: number;
-  tags: { name: string; rank: number }[];
-  type: string;
-}
-
-export const create = async ({
-  url,
-  creator_id,
-  length,
-  name,
-  tags,
-  type,
-}: CreateResourcePayload): Promise<any> => {
+export const create = async (
+  url: string,
+  creator_id: number,
+  name: string,
+  length: number,
+  tags: { name: string; rank: number }[],
+  type: string
+): Promise<any> => {
+  console.log(url);
   const resource = await Resource.create({ url, creator_id });
   const recourse_id = resource.getDataValue("id");
   await addResourceLength({
@@ -74,6 +66,19 @@ export const create = async ({
   });
   return resource;
 };
+
+export interface ResourceViewOutput {}
+
+// export const getAll = async (): Promise<UserOutput[]> => {
+//   return User.findAll({
+//     where: {
+//       ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } }),
+//     },
+//     ...((filters?.isDeleted || filters?.includeDeleted) && {
+//       paranoid: true,
+//     }),
+//   });
+// };
 
 export const createResourceType = async (
   payload: ResourceTypeInput
