@@ -36,3 +36,5 @@ export {
   ResourceTypeSuggestionInput,
   ResourceTypeSuggestionOutput,
 } from "./ResourceTypeSuggestion";
+
+export { default as ResourceData } from "./ResourceData";

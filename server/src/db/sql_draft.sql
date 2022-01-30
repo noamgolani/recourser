@@ -1,95 +1,54 @@
-insert into
-  "Users" (
-    username,
-    email,
-    password,
-    "createdAt",
-    "updatedAt"
-  )
-values
-  ('noam', 'noam@gmail.com', '123456', now(), now());
-select
-  *
-from
-  "Resources";
-select
-  *
-from
-  "Resources" r
-  join (
-    select
-      recourse_id,
-      avg(length) avg_length
-    from
-      "ResourceLengthSuggestions" rls
-    group by
-      rls.recourse_id
-  ) as rl on rl.recourse_id = r.id
-  join (
-    select
-      recourse_id,
-      max(name) name
-    from
-      "ResourceNameSuggestions" rns
-    group by
-      rns.recourse_id
-  ) as rn on rn.recourse_id = r.id;
-select
-  recourse_id,
-  type_name
-from
-  () as rts
-group by
-  rts.recourse_id;
-select
-  recourse_id,
-  max(count)
-from
-  (
-    select
-      recourse_id,
-      type_name,
-    from
-      "ResourceTypeSuggestions" rts
-    group by
-      rts.recourse_id,
-      rts.type_name
-  ) as rts
-group by
-  rts.recourse_id;
-select
-  recourse_id,
-  type_name,
-  RANK () OVER (
-    PARTITION BY recourse_id,
-    type_name
-    ORDER BY
-      count(*) DESC
-  ) votes
-from
-  "ResourceTypeSuggestions";
-create view rrr as
-SELECT
-  recourse_id,
-  type_name,
-  Count(*)
-FROM
-  "ResourceTypeSuggestions" rts
-GROUP BY
-  rts.recourse_id,
-  rts.type_name;
-SELECT
-  a.recourse_id,
-  b.type_name
-FROM
-  (
-    SELECT
-      rts.recourse_id,
-      Max(rts.count) AS max_count
-    FROM
-      rrr AS rts
-    GROUP BY
-      rts.recourse_id
-  ) a
-  INNER JOIN rrr AS b ON a.recourse_id = b.recourse_id
-  AND a.max_count = b.count;
+WITH count_types AS 
+	(SELECT recourse_id, type_name, Count(*)
+       FROM "ResourceTypeSuggestions" rts
+      GROUP BY rts.recourse_id, rts.type_name)
+SELECT recourse_id, type_name
+  FROM (SELECT recourse_id, type_name, approved,
+               Rank () OVER (partition BY recourse_id ORDER BY approved DESC, count DESC) rank
+          FROM count_types
+          JOIN "ResourceTypes" rt
+            ON count_types.type_name = rt.NAME) ranked
+ WHERE ranked.rank = 1; 
+ 
+ WITH count_tags AS 
+	(SELECT recourse_id, tag_name, sum(rank)
+       FROM "ResourceTagSuggestions" rts
+      GROUP BY rts.recourse_id, rts.tag_name)
+SELECT recourse_id, tag_name
+  FROM (SELECT recourse_id, tag_name, approved,
+               Rank () OVER (partition BY recourse_id ORDER BY approved DESC, sum DESC) rank
+          FROM count_tags
+          JOIN "ResourceTags" rt
+            ON count_tags.tag_name = rt.NAME) ranked
+ WHERE ranked.rank = 1; 
+
+
+create view resource_data as 
+WITH count_types AS 
+	(SELECT recourse_id, type_name, Count(*)
+       FROM "ResourceTypeSuggestions" rts
+      GROUP BY rts.recourse_id, rts.type_name),
+      count_tags AS 
+	(SELECT recourse_id, tag_name, sum(rank)
+       FROM "ResourceTagSuggestions" rts
+      GROUP BY rts.recourse_id, rts.tag_name)
+select id, url, creator_id, "createdAt", "updatedAt", rl.avg_length length,rn.name, rtypes.type_name type, rtags.tag_name tag from "Resources" r 
+	join (select recourse_id, avg(length) avg_length from "ResourceLengthSuggestions" rls
+			group by rls.recourse_id) rl on rl.recourse_id = r.id
+	join (select recourse_id, max(name) name from "ResourceNameSuggestions" rns
+			group by rns.recourse_id) rn on rn.recourse_id = r.id
+	join (SELECT recourse_id, type_name
+  FROM (SELECT recourse_id, type_name, approved,
+               Rank () OVER (partition BY recourse_id ORDER BY approved DESC, count DESC) rank
+          FROM count_types
+          JOIN "ResourceTypes" rt
+            ON count_types.type_name = rt.NAME) ranked
+ WHERE ranked.rank = 1) rtypes on rtypes.recourse_id = r.id
+	join (SELECT recourse_id, tag_name
+  FROM (SELECT recourse_id, tag_name, approved,
+               Rank () OVER (partition BY recourse_id ORDER BY approved DESC, sum DESC) rank
+          FROM count_tags
+          JOIN "ResourceTags" rt
+            ON count_tags.tag_name = rt.NAME) ranked
+ WHERE ranked.rank = 1) rtags on rtags.recourse_id = r.id;
+			

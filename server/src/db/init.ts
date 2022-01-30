@@ -8,12 +8,15 @@ import {
   ResourceTagSuggestion,
   ResourceType,
   ResourceTypeSuggestion,
+  ResourceData,
 } from "./models/Resource";
 
 const isDev = process.env.NODE_ENV === "development";
 
 const dbInit = () => {
   User.sync({ alter: isDev });
+
+  ResourceData.sync();
 
   // Resource sync
   Resource.sync({ alter: isDev });
