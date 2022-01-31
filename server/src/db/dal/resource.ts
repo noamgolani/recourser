@@ -19,6 +19,9 @@ import {
   ResourceTypeSuggestionInput,
   ResourceTypeSuggestionOutput,
 } from "../models/Resource";
+import ResourceData, {
+  ResourceDataOutput,
+} from "../models/Resource/ResourceData";
 
 export const create = async (
   url: string,
@@ -69,16 +72,9 @@ export const create = async (
 
 export interface ResourceViewOutput {}
 
-// export const getAll = async (): Promise<UserOutput[]> => {
-//   return User.findAll({
-//     where: {
-//       ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } }),
-//     },
-//     ...((filters?.isDeleted || filters?.includeDeleted) && {
-//       paranoid: true,
-//     }),
-//   });
-// };
+export const getAll = async (): Promise<ResourceDataOutput[]> => {
+  return ResourceData.findAll();
+};
 
 export const createResourceType = async (
   payload: ResourceTypeInput

@@ -1,30 +1,66 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import sequelizeConnection from "../../config";
 
-export default sequelizeConnection.define("resource_data", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
+interface ResourceDataAttributes {
+  id: number;
+  url: string;
+  creator_id: number;
+  length: number;
+  name: string;
+  type: string;
+  tag: string;
+}
+
+export interface ResourceDataOutput extends Required<ResourceDataAttributes> {}
+
+class ResourceData
+  extends Model<ResourceDataAttributes>
+  implements ResourceDataAttributes
+{
+  public id!: number;
+  public url!: string;
+  public creator_id!: number;
+  public length!: number;
+  public name!: string;
+  public type!: string;
+  public tag!: string;
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+ResourceData.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    url: {
+      type: DataTypes.STRING,
+    },
+    creator_id: {
+      type: DataTypes.INTEGER,
+    },
+    length: {
+      type: DataTypes.INTEGER,
+    },
+    name: {
+      type: DataTypes.STRING,
+    },
+    type: {
+      type: DataTypes.STRING,
+    },
+    tag: {
+      type: DataTypes.STRING,
+    },
   },
-  url: {
-    type: DataTypes.STRING,
-  },
-  creator_id: {
-    type: DataTypes.INTEGER,
-  },
-  length: {
-    type: DataTypes.INTEGER,
-  },
-  name: {
-    type: DataTypes.STRING,
-  },
-  type: {
-    type: DataTypes.STRING,
-  },
-  tag: {
-    type: DataTypes.STRING,
-  },
-});
+  {
+    tableName: "resource_data",
+    sequelize: sequelizeConnection,
+  }
+);
+
+export default ResourceData;
 
 // the view query
 

@@ -16,8 +16,6 @@ const isDev = process.env.NODE_ENV === "development";
 const dbInit = () => {
   User.sync({ alter: isDev });
 
-  ResourceData.sync();
-
   // Resource sync
   Resource.sync({ alter: isDev });
   ResourceView.sync({ alter: isDev });
@@ -29,6 +27,8 @@ const dbInit = () => {
 
   ResourceType.sync({ alter: isDev });
   ResourceTypeSuggestion.sync({ alter: isDev });
+
+  ResourceData.sync();
 };
 
 export default dbInit;
