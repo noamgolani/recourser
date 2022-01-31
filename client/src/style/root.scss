@@ -1,42 +1,94 @@
-body, html {
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  color: var(--font-clr-primary);
 }
 
-::root {
-	
+:root {
+  --clr-primary: #4ecca3;
+  --clr-dark-secondary: #393e46;
+  --clr-dark-primary: hsl(214, 17%, 16%);
+  --clr-dark-primary-transparent: rgba(11, 13, 15, 0.5);
+
+  --clr-light-primary: #eeeeee;
+
+  --font-clr-primary: var(--clr-light-primary);
+}
+
+h1 {
+  font-size: 10vw;
+  font-weight: 700;
+  margin: 0 0 0.2em 0;
+}
+
+p {
+  font-weight: 200;
+  margin: 0;
+}
+
+.box {
+  width: 100%;
+  height: fit-content;
+
+  border: 1px solid var(--clr-dark-secondary);
+  border-radius: 0.5rem;
+  background-color: var(--clr-dark-primary-transparent);
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.5);
 }
 
 .page {
-	margin: 0;
-	padding: 1rem;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 1rem;
 }
 
 .container {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	padding: 1rem;
+  position: relative;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  max-width: 45rem;
 }
 
 .flex-between {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .resource-item {
-	width: 400px;
-	padding: 10px;
+  width: 400px;
+  padding: 10px;
 
-	:hover {
-		cursor: pointer;
-	}
+  :hover {
+    cursor: pointer;
+  }
 }
 
 .tag {
-	background-color: grey;
-	border-radius: 15px;
-	padding: 2px 7px;
+  background-color: grey;
+  border-radius: 15px;
+  padding: 2px 7px;
 }

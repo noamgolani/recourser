@@ -5,14 +5,16 @@ import ResourceListItem from "./ResourceListItem";
 const ResourceList: FC = () => {
   const { isLoading, error, data } = useGetAllResources();
   return (
-    <div className="resource-list">
+    <div className="resource-list box">
       {isLoading && <span>Loading resources...</span>}
       {!isLoading && error && (
         <span className="error"> {JSON.stringify(error)}</span>
       )}
       {!isLoading &&
         data &&
-        data.map((resource) => <ResourceListItem resource={resource} />)}
+        data.map((resource) => (
+          <ResourceListItem key={resource.id} resource={resource} />
+        ))}
     </div>
   );
 };
