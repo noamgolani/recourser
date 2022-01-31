@@ -12,8 +12,9 @@
     "strictFunctionTypes": true /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */,
     "noImplicitThis": true /* Enable error reporting when `this` is given the type `any`. */,
     "noUnusedLocals": true /* Enable error reporting when a local variables aren't read. */,
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  },
-  "references": [{"path": "../@types"}],
-  "include":["./src"]
+    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+    "composite": true
+  }
+  ,
+  "include":["./src"],
 }
