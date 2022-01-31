@@ -1,61 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 
-const mockR = [
-	{
-		id: 1,
-		tags: ["react", "sass"],
-		views: 12,
-		type: "blog",
-		time: "2h",
-		name: "integrate sass and react",
-	},
-	{
-		id: 2,
-		tags: ["express"],
-		views: 304,
-		type: "video",
-		time: "30m",
-		name: "express 101",
-	},
-	{
-		id: 3,
-		tags: ["typescript", "react", "express"],
-		views: 43,
-		type: "example",
-		time: "1.5h",
-		name: "full stack complete",
-	},
-];
+import {} from "react-query";
+import { useGetAllResources } from "../queries";
 
-function HomePage() {
-	return (
-		<div className="page">
-			<div className="container">
-				<div>
-					<input type="text" />
-				</div>
-				<div>
-					{mockR.map(({ name, id, tags, views, type, time }) => (
-						<div key={id} className="resource-item">
-							<div className="flex-between">
-								<span>{name}</span>
-								<span><b>{type}</b></span>
-							</div>
-							<div className="flex-between">
-								<div>
-									{tags.map((tag) => (
-										<span className="tag">{tag}</span>
-									))}
-								</div>
-								<span>{views} views</span>
-								<span>{time} read</span>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
-	);
-}
+const HomePage: FC = () => {
+  const { isLoading, error, data } = useGetAllResources();
+  return (
+    <div className="page">
+      <div className="container">
+        {isLoading && <span>Loading...</span>}
+        {!isLoading && error && (
+          <span className="error"> {JSON.stringify(error)}</span>
+        )}
+        {!isLoading && data && <span> {JSON.stringify(data)}</span>}
+      </div>
+    </div>
+  );
+};
 
 export default HomePage;
