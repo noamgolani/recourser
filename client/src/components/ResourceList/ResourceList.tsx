@@ -5,11 +5,7 @@ import ResourceListItem from "./ResourceListItem";
 const ResourceList: FC = () => {
   const { isLoading, error, data } = useGetAllResources();
   return (
-    <div className="resource-list box">
-      {isLoading && <span>Loading resources...</span>}
-      {!isLoading && error && (
-        <span className="error"> {JSON.stringify(error)}</span>
-      )}
+    <div className="resource-list">
       {!isLoading &&
         data &&
         data.map((resource) => (

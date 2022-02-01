@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { FiClock } from "react-icons/fi";
 import { ResourceDataOutput } from "../../../../server/src";
 
 export interface ResourceListItemProps {
@@ -8,7 +9,13 @@ export interface ResourceListItemProps {
 const ResourceListItem: FC<ResourceListItemProps> = ({ resource }) => {
   return (
     <div className="resource-list-item">
-      {resource.name} : {resource.type}
+      <span>{resource.type}</span>
+      <span>{resource.name}</span>
+      <span>{resource.tag}</span>
+      <span className="flex-between">
+        {Math.floor(resource.length)}
+        <FiClock />
+      </span>
     </div>
   );
 };

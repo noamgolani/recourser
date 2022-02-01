@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+@import "./resourceList.scss";
+@import "./utils.scss";
+@import "./flip.scss";
+
 body,
 html {
   margin: 0;
@@ -10,14 +14,9 @@ html {
 }
 
 :root {
-  --clr-primary: #4ecca3;
-  --clr-dark-secondary: #393e46;
-  --clr-dark-primary: hsl(214, 17%, 16%);
-  --clr-dark-primary-transparent: rgba(11, 13, 15, 0.5);
+  --border-clr-primary: rgba(255, 255, 255, 0.05);
 
-  --clr-light-primary: #eeeeee;
-
-  --font-clr-primary: var(--clr-light-primary);
+  --font-clr-primary: #eeeeee;
 }
 
 h1 {
@@ -26,18 +25,30 @@ h1 {
   margin: 0 0 0.2em 0;
 }
 
+h2 {
+  font-size: 3vw;
+  font-weight: 600;
+  margin: 0 0 0.2em 0;
+}
+
 p {
   font-weight: 200;
   margin: 0;
+  margin-bottom: 1rem;
 }
 
 .box {
-  width: 100%;
-  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
 
-  border: 1px solid var(--clr-dark-secondary);
+  width: 100%;
   border-radius: 0.5rem;
-  background-color: var(--clr-dark-primary-transparent);
+  border: 2px solid var(--border-clr-primary);
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  box-shadow: 0px 8px 15px 8px rgba(26, 26, 26, 0.4);
 }
 
 .page::before {
